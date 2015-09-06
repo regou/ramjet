@@ -15,8 +15,15 @@ export default {
 			options.duration = 400;
 		}
 
+		if ( !( 'visionNodeHandler' in options ) ) {
+			options.vNodeHandler = () => {};
+		}
+
 		const from = wrapNode( fromNode );
 		const to = wrapNode( toNode );
+
+		options.vNodeHandler( from.clone , 'from');
+		options.vNodeHandler( to.clone , 'to');
 
 		if ( from.isSvg || to.isSvg && !appendedSvg ) {
 			appendSvg();
